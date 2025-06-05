@@ -1,0 +1,74 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ImperialCollegeLondon/pycsvy:
+      branch: main
+      repo: https://github.com/ImperialCollegeLondon/pycsvy
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy git:
+        commands:
+        - /usr/bin/env sh .sqa/script.snappy-cardinal-audemer.sh
+        container: qc.acc_sloppy-saffron-coati
+  QC.Doc:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-malachite-cattle.sh
+        container: qc.doc_bumpy-eggplant-corgi
+      github.com/ImperialCollegeLondon/pycsvy git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-asparagus-frog.sh
+        container: qc.doc_fuzzy-bronze-barb
+      github.com/ImperialCollegeLondon/pycsvy markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-eggplant-shrew.sh
+        container: qc.doc_shaggy-persimmon-mist
+  QC.Lic:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-harlequin-bloodhound.sh
+        container: qc.lic_ugly-zucchini-mouse
+  QC.Met:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-black-dalmatian.sh
+        container: qc.met_squirrely-coral-cuscus
+  QC.Sec:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-dandelion-gopher.sh
+        container: qc.sec_lovely-khaki-paradise
+  QC.Sty:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-plum-tetra.sh
+        container: qc.sty_sleepy-seashell-lionfish
+      github.com/ImperialCollegeLondon/pycsvy jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-ecru-javanese.sh
+        container: qc.sty_hasty-chestnut-akita
+  QC.Uni:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-cornflower-bongo.sh
+        container: qc.uni_thirsty-wheat-dingo
+  QC.Ver:
+    repos:
+      github.com/ImperialCollegeLondon/pycsvy get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-aquamarine-chinchilla.sh
+        container: qc.ver_gimpy-magenta-slug
+timeout: 5400
